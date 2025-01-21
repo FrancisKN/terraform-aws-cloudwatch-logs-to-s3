@@ -63,8 +63,8 @@ resource "aws_kinesis_firehose_delivery_stream" "subscription_filter_firehose" {
   extended_s3_configuration {
     role_arn            = aws_iam_role.kinesis_firehose.arn
     bucket_arn          = data.aws_s3_bucket.subscription_filter.arn
-    buffer_interval     = each.value.buffer_interval
-    buffer_size         = each.value.buffer_size
+    buffering_interval  = each.value.buffer_interval
+    buffering_size      = each.value.buffer_size
     compression_format  = "GZIP"
     prefix              = "${var.s3_output_prefix}${replace(each.value.log_group_name, "/^//", "")}/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/"
     error_output_prefix = "${var.s3_output_prefix}ErrorOutput/${replace(each.value.log_group_name, "/^//", "")}/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/!{firehose:error-output-type}/"
@@ -109,8 +109,8 @@ resource "aws_kinesis_firehose_delivery_stream" "subscription_filter_firehose" {
     s3_backup_mode = "Enabled"
     s3_backup_configuration {
       bucket_arn         = data.aws_s3_bucket.subscription_filter.arn
-      buffer_interval    = each.value.buffer_interval
-      buffer_size        = each.value.buffer_size
+      buffering_interval = each.value.buffer_interval
+      buffering_size     = each.value.buffer_size
       compression_format = "GZIP"
       prefix             = "${var.s3_output_prefix}source_records/"
       role_arn           = aws_iam_role.kinesis_firehose.arn
