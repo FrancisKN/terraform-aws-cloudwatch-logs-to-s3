@@ -128,7 +128,7 @@ data "aws_iam_policy_document" "kinesis_firehose" {
       variable = "kms:ViaService"
 
       values = [
-        "s3.ap-northeast-1.amazonaws.com"
+        "s3.eu-west-1.amazonaws.com"
       ]
     }
 
@@ -158,7 +158,7 @@ data "aws_iam_policy_document" "kinesis_firehose" {
       variable = "kms:ViaService"
 
       values = [
-        "kinesis.ap-northeast-1.amazonaws.com"
+        "kinesis.eu-west-1.amazonaws.com"
       ]
     }
 
