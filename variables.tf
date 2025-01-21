@@ -52,6 +52,8 @@ EOT
     buffer_size               = number
     processor_buffer_interval = number
     processor_buffer_size     = number
+    compression_format        = string
+    file_extension            = string
   }))
 }
 

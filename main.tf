@@ -65,7 +65,8 @@ resource "aws_kinesis_firehose_delivery_stream" "subscription_filter_firehose" {
     bucket_arn          = data.aws_s3_bucket.subscription_filter.arn
     buffering_interval  = each.value.buffer_interval
     buffering_size      = each.value.buffer_size
-    compression_format  = "GZIP"
+    compression_format  = each.value.compression_format
+    file_extension      = each.value.file_extension
     prefix              = "${var.s3_output_prefix}${replace(each.value.log_group_name, "/^//", "")}/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/"
     error_output_prefix = "${var.s3_output_prefix}ErrorOutput/${replace(each.value.log_group_name, "/^//", "")}/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/!{firehose:error-output-type}/"
 
