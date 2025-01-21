@@ -2,18 +2,6 @@ data "archive_file" "lambda_function_subscription_filter_processor" {
   type        = "zip"
   source_dir  = "${var.src_dir}/kinesis-firehose-cloudwatch-logs-processor"
   output_path = "./${var.src_dir}/uploads/${var.prefix}subscription-filter-processor.zip"
-  
-  output_file_mode = "0666"
-  
-  excludes = [
-    ".DS_Store",
-    "__pycache__",
-    "*.pyc",
-  ]
-
-  triggers = {
-    src_dir_hash = sha256(join("", [for f in fileset("${var.src_dir}/kinesis-firehose-cloudwatch-logs-processor", "**") : filesha256("${var.src_dir}/kinesis-firehose-cloudwatch-logs-processor/${f}")]))
-  }
 }
 
 resource "aws_lambda_function" "subscription_filter_processor" {
